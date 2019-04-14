@@ -1,0 +1,172 @@
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:id="@+id/top_layout_banners"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/favourite_imgv">
+
+        <ImageView
+            android:id="@+id/first_banner_imgv"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@color/red"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            />
+
+        <ImageView
+            android:id="@+id/second_banner_imgv"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@color/colorAccent"
+            android:layout_below="@id/first_banner_imgv"
+            android:layout_alignParentStart="true"/>
+
+
+    </RelativeLayout>
+
+    <ImageView
+    android:id="@+id/favourite_imgv"
+    android:layout_width="36dp"
+    android:layout_height="36dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="16dp"
+    android:src="@color/red"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/item_picture_imgv"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:tint="@color/red"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintTop_toBottomOf="@id/top_layout_banners"/>
+
+    <TextView
+        android:id="@+id/title_item_txtv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="center_vertical|start"
+        android:textAlignment="gravity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_picture_imgv"
+        tools:text="TITLE" />
+
+    <ImageView
+        android:id="@+id/star_rating"
+        android:layout_width="180dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:background="@android:color/transparent"
+        android:scaleType="center"
+        android:src="@android:color/holo_blue_dark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_item_txtv"/>
+
+    <TextView
+        android:id="@+id/price_txtv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:visibility="visible"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/star_rating"
+        tools:text="$3.700" />
+
+    <LinearLayout
+        android:id="@+id/bonificated_price_linear_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/price_txtv"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp">
+
+        <TextView
+            android:id="@+id/scrapped_price_txtv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:textAlignment="viewStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/star_rating"
+            tools:text="$3.700" />
+
+        <TextView
+            android:id="@+id/bonification_txtv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="16dp"
+            android:visibility="visible"
+            android:textAlignment="viewStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/star_rating"
+            tools:text="%15 OFF" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/extra_features_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toBottomOf="@id/bonificated_price_linear_layout"
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <TextView
+            android:id="@+id/full_hd_txtv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:padding="2dp"
+            android:background="@android:color/darker_gray"
+            android:textColor="@color/black"
+            android:text="FULL HD"/>
+        <TextView
+            android:id="@+id/wifi_txtv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:padding="2dp"
+            android:background="@android:color/darker_gray"
+            android:textColor="@color/black"
+            android:text="WI-FI"/>
+        <TextView
+            android:id="@+id/netflix_txtv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:padding="2dp"
+            android:background="@android:color/darker_gray"
+            android:textColor="@color/black"
+            android:text="NETFLIX"/>
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

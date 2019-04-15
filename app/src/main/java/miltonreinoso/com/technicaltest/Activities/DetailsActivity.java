@@ -5,7 +5,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -23,6 +24,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+import miltonreinoso.com.technicaltest.Adapters.ReviewsRecyclerAdapter;
 import miltonreinoso.com.technicaltest.Adapters.ViewPagerAdapter;
 import miltonreinoso.com.technicaltest.Models.ArticleDetails;
 import miltonreinoso.com.technicaltest.Models.ArticleReviews;
@@ -38,6 +40,7 @@ public class DetailsActivity extends AppCompatActivity {
     private List<ArticleReviews.Items> mArticleReviewsList;
     private String mArticleID;
 
+    public ViewPager mPicturesViewPager;
     private TextView mNumberOfPicturesTxtv;
     private TextView mNumberOfVideosTxtv;
     private TextView mItemTitleTxtv;
@@ -45,20 +48,17 @@ public class DetailsActivity extends AppCompatActivity {
     private TextView mPriceTxtv;
     private TextView mListPriceTxtv;
     private TextView mDiscountTxtv;
+    private TextView mAverageRating;
+    private RatingBar mRatingBarGeneralReviews;
     private ImageView mBackToolbarTxtv;
-
-    private TextView mReview;
-    public ViewPager mPicturesViewPager;
-
-
+    private RecyclerView mReviewRecyclerView;
+    private ReviewsRecyclerAdapter mReviewsAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-
-
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -81,8 +81,10 @@ public class DetailsActivity extends AppCompatActivity {
         mPriceTxtv = findViewById(R.id.details_price_txtv);
         mListPriceTxtv = findViewById(R.id.details_list_price_txtv);
         mDiscountTxtv = findViewById(R.id.details_discount_txtv);
+        mAverageRating = findViewById(R.id.general_rating_reviews_txtv);
+        mRatingBarGeneralReviews = findViewById(R.id.star_rating_reviews_general);
+        mReviewRecyclerView = findViewById(R.id.reviews_recycler_view);
         mBackToolbarTxtv = findViewById(R.id.details_back_toolbar_imgb);
-
         mBackToolbarTxtv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,13 +93,14 @@ public class DetailsActivity extends AppCompatActivity {
         });
 
 
-
-        mFetch.execute(ARTICLE_DETAILS_URL + mArticleID, ARTICLE_DETAILS_URL + mArticleID + "/reviews" );
-
-
+        mFetch.execute(
+                ARTICLE_DETAILS_URL + mArticleID,
+                ARTICLE_DETAILS_URL + mArticleID + "/reviews" );
     }
 
     private void setupView () {
+
+
 
         String[] mImagesURLs = new String[mArticleDetails.getResources().getImages().size()];
 
@@ -107,27 +110,47 @@ public class DetailsActivity extends AppCompatActivity {
         ViewPagerAdapter mViewPagerAdapter = new ViewPagerAdapter(this, mImagesURLs);
         mPicturesViewPager.setAdapter(mViewPagerAdapter);
 
-        mNumberOfPicturesTxtv.setText(mArticleDetails.getResources().getImages().size()+"");
-        mNumberOfVideosTxtv.setText(mArticleDetails.getResources().getVideos().size()+"");
+
 
         String price = "$" + mArticleDetails.getPrice();
         String listPrice = "$" + mArticleDetails.getList_price();
         String discount = mArticleDetails.getDiscount()+ "% OFF";
+        String numberOfPictures = mArticleDetails.getResources().getImages().size()+"";
+        String numberOfVideos = mArticleDetails.getResources().getVideos().size()+"";
+
 
 
         mItemTitleTxtv.setText(mArticleDetails.getDescription());
         mPriceTxtv.setText(price);
-        mListPriceTxtv.setText(listPrice);
-        mListPriceTxtv.setPaintFlags(mListPriceTxtv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        mDiscountTxtv.setText(discount);
 
-//        mReview.setText(mArticleReviewsList.get(0).getReviews().get(0).getReviewText());
+        if (!discount.contains("null") && mArticleDetails.getDiscount() != 0){
 
+            mListPriceTxtv.setText(listPrice);
+            mListPriceTxtv.setPaintFlags(mListPriceTxtv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            mDiscountTxtv.setText(discount);
+        }
+        else {
+            mListPriceTxtv.setVisibility(View.GONE);
+            mDiscountTxtv.setVisibility(View.GONE);
+        }
+
+        mNumberOfPicturesTxtv.setText(numberOfPictures);
+        mNumberOfVideosTxtv.setText(numberOfVideos);
+
+        if (mArticleReviewsList != null){
+
+            mRatingBar.setProgress((int) Math.round(mArticleReviewsList.get(0).getReview_statistics().getAverage_overall_rating() * 2));
+            mRatingBarGeneralReviews.setProgress((int) Math.round(mArticleReviewsList.get(0).getReview_statistics().getAverage_overall_rating() * 2));
+            mAverageRating.setText(mArticleReviewsList.get(0).getReview_statistics().getAverage_overall_rating() + "");
+            mReviewsAdapter = new ReviewsRecyclerAdapter(mArticleReviewsList.get(0).getReviews());
+            mReviewRecyclerView.setAdapter(mReviewsAdapter);
+            mReviewRecyclerView.setHasFixedSize(false);
+            mReviewRecyclerView.setLayoutManager(new LinearLayoutManager( getApplicationContext()));
+        }
     }
 
 
-
-    private class FetchDetailsTask extends AsyncTask<String,Void,String> {
+    private class FetchDetailsTask extends AsyncTask<String,Void,String[]> {
 
         @Override
         protected void onPreExecute() {
@@ -135,12 +158,24 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
         @Override
-        protected String doInBackground(String... params) {
+        protected String[] doInBackground(String... params) {
+
+            String [] bufferedStrings ={
+                buildHTTPConnection(params[0]),
+                buildHTTPConnection(params[1])
+            };
+
+            return bufferedStrings;
+
+        }
+
+
+        protected String buildHTTPConnection(String urlString){
             HttpURLConnection connection = null;
             BufferedReader reader = null;
 
             try {
-                URL url = new URL(params[0]);
+                URL url = new URL(urlString);
                 connection = (HttpURLConnection) url.openConnection();
                 connection.connect();
 
@@ -153,7 +188,6 @@ public class DetailsActivity extends AppCompatActivity {
 
                 while ((line = reader.readLine()) != null) {
                     buffer.append(line+"\n");
-                    Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
                 }
 
                 return buffer.toString();
@@ -178,15 +212,22 @@ public class DetailsActivity extends AppCompatActivity {
             return null;
         }
 
-        @Override
-        protected void onPostExecute(String detailsStringURL ) {
 
-            StringReader jsonStringDetails = new StringReader(detailsStringURL);
-//            StringReader jsonStringReviews = new StringReader(detailsStringURL+"/reviews");
+        @Override
+        protected void onPostExecute(String[] detailsStringURL ) {
+
+            StringReader jsonStringDetails = new StringReader(detailsStringURL[0]);
+            StringReader jsonStringReviews;
+            try {
+                    jsonStringReviews = new StringReader(detailsStringURL [1]);
+                    }
+            catch (Exception exception){
+                jsonStringReviews = new StringReader("");
+            }
 
             mArticleDetails = new Gson().fromJson(jsonStringDetails, ArticleDetails.class);
-//            mArticleReviews = new Gson().fromJson(jsonStringReviews, ArticleReviews.class);
-//            mArticleReviewsList = mArticleReviews.getItems();
+            mArticleReviews = new Gson().fromJson(jsonStringReviews, ArticleReviews.class);
+            if (mArticleReviews!= null) mArticleReviewsList = mArticleReviews.getItems();
             setupView();
         }
     }

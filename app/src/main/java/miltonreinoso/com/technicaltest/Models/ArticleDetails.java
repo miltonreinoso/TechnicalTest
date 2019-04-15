@@ -11,7 +11,7 @@ public class ArticleDetails {
 
     private final String brand;
 
-    private final String originalBrand;
+    private final String original_brand;
 
     private final int list_price;
 
@@ -19,15 +19,15 @@ public class ArticleDetails {
 
     private final int discount;
 
-    private final boolean enabledForSale;
+    private final boolean enabled_for_sale;
 
-    private final PreferredInstallment preferredInstallment;
+    private final PreferredInstallment preferred_installment;
 
     private final String model;
 
     private final int categoryId;
 
-    private final MainImage mainImage;
+    private final MainImage main_image;
 
     private final boolean virtual;
 
@@ -35,42 +35,42 @@ public class ArticleDetails {
 
     private final String category;
 
-    private final List<Object> productTags;
+    private final List<Object> product_tags;
 
-    private final int priceMatchingDiscount;
+    private final int price_matching_discount;
 
-    private final double priceWithoutVat;
+    private final double price_without_vat;
 
-    private final int vatPercentage;
+    private final int vat_percentage;
 
     private final Resources resources;
 
     public ArticleDetails(String xid, String description, String summary, String brand,
-                          String originalBrand, int list_price, int price, int discount, boolean enabledForSale,
-                          PreferredInstallment preferredInstallment, String model, int categoryId,
-                          MainImage mainImage, boolean virtual, List<Integer> categories, String category,
-                          List<Object> productTags, int priceMatchingDiscount, double priceWithoutVat,
-                          int vatPercentage, Resources resources) {
+                          String original_brand, int list_price, int price, int discount, boolean enabled_for_sale,
+                          PreferredInstallment preferred_installment, String model, int categoryId,
+                          MainImage main_image, boolean virtual, List<Integer> categories, String category,
+                          List<Object> product_tags, int price_matching_discount, double price_without_vat,
+                          int vat_percentage, Resources resources) {
         this.xid = xid;
         this.description = description;
         this.summary = summary;
         this.brand = brand;
-        this.originalBrand = originalBrand;
+        this.original_brand = original_brand;
         this.list_price = list_price;
         this.price = price;
         this.discount = discount;
-        this.enabledForSale = enabledForSale;
-        this.preferredInstallment = preferredInstallment;
+        this.enabled_for_sale = enabled_for_sale;
+        this.preferred_installment = preferred_installment;
         this.model = model;
         this.categoryId = categoryId;
-        this.mainImage = mainImage;
+        this.main_image = main_image;
         this.virtual = virtual;
         this.categories = categories;
         this.category = category;
-        this.productTags = productTags;
-        this.priceMatchingDiscount = priceMatchingDiscount;
-        this.priceWithoutVat = priceWithoutVat;
-        this.vatPercentage = vatPercentage;
+        this.product_tags = product_tags;
+        this.price_matching_discount = price_matching_discount;
+        this.price_without_vat = price_without_vat;
+        this.vat_percentage = vat_percentage;
         this.resources = resources;
     }
 
@@ -90,8 +90,8 @@ public class ArticleDetails {
         return brand;
     }
 
-    public String getOriginalBrand() {
-        return originalBrand;
+    public String getOriginal_brand() {
+        return original_brand;
     }
 
     public int getList_price() {
@@ -106,12 +106,12 @@ public class ArticleDetails {
         return discount;
     }
 
-    public boolean isEnabledForSale() {
-        return enabledForSale;
+    public boolean isEnabled_for_sale() {
+        return enabled_for_sale;
     }
 
-    public PreferredInstallment getPreferredInstallment() {
-        return preferredInstallment;
+    public PreferredInstallment getPreferred_installment() {
+        return preferred_installment;
     }
 
     public String getModel() {
@@ -122,8 +122,8 @@ public class ArticleDetails {
         return categoryId;
     }
 
-    public MainImage getMainImage() {
-        return mainImage;
+    public MainImage getMain_image() {
+        return main_image;
     }
 
     public boolean isVirtual() {
@@ -138,20 +138,20 @@ public class ArticleDetails {
         return category;
     }
 
-    public List<Object> getProductTags() {
-        return productTags;
+    public List<Object> getProduct_tags() {
+        return product_tags;
     }
 
-    public int getPriceMatchingDiscount() {
-        return priceMatchingDiscount;
+    public int getPrice_matching_discount() {
+        return price_matching_discount;
     }
 
-    public double getPriceWithoutVat() {
-        return priceWithoutVat;
+    public double getPrice_without_vat() {
+        return price_without_vat;
     }
 
-    public int getVatPercentage() {
-        return vatPercentage;
+    public int getVat_percentage() {
+        return vat_percentage;
     }
 
     public Resources getResources() {
@@ -159,7 +159,7 @@ public class ArticleDetails {
     }
 
     public static class PreferredInstallment {
-        private final int basePrice;
+        private final int base_price;
 
         private final int installments;
 
@@ -167,9 +167,9 @@ public class ArticleDetails {
 
         private final double surcharge;
 
-        private final double finalPrice;
+        private final double final_price;
 
-        private final double installmentPrice;
+        private final double installment_price;
 
         private final double eapr;
 
@@ -177,32 +177,32 @@ public class ArticleDetails {
 
         private final String description;
 
-        private final int gatewayInstallments;
+        private final int gateway_installments;
 
-        private final boolean visaFinancing;
+        private final boolean visa_financing;
 
         private final int repayment;
 
-        public PreferredInstallment(int basePrice, int installments, double interest,
-                                    double surcharge, double finalPrice, double installmentPrice, double eapr,
-                                    double tfc, String description, int gatewayInstallments, boolean visaFinancing,
+        public PreferredInstallment(int base_price, int installments, double interest,
+                                    double surcharge, double final_price, double installment_price, double eapr,
+                                    double tfc, String description, int gateway_installments, boolean visaFinancing,
                                     int repayment) {
-            this.basePrice = basePrice;
+            this.base_price = base_price;
             this.installments = installments;
             this.interest = interest;
             this.surcharge = surcharge;
-            this.finalPrice = finalPrice;
-            this.installmentPrice = installmentPrice;
+            this.final_price = final_price;
+            this.installment_price = installment_price;
             this.eapr = eapr;
             this.tfc = tfc;
             this.description = description;
-            this.gatewayInstallments = gatewayInstallments;
-            this.visaFinancing = visaFinancing;
+            this.gateway_installments = gateway_installments;
+            this.visa_financing = visaFinancing;
             this.repayment = repayment;
         }
 
-        public int getBasePrice() {
-            return basePrice;
+        public int getBase_price() {
+            return base_price;
         }
 
         public int getInstallments() {
@@ -217,12 +217,12 @@ public class ArticleDetails {
             return surcharge;
         }
 
-        public double getFinalPrice() {
-            return finalPrice;
+        public double getFinal_price() {
+            return final_price;
         }
 
-        public double getInstallmentPrice() {
-            return installmentPrice;
+        public double getInstallment_price() {
+            return installment_price;
         }
 
         public double getEapr() {
@@ -237,12 +237,12 @@ public class ArticleDetails {
             return description;
         }
 
-        public int getGatewayInstallments() {
-            return gatewayInstallments;
+        public int getGateway_installments() {
+            return gateway_installments;
         }
 
         public boolean isVisaFinancing() {
-            return visaFinancing;
+            return visa_financing;
         }
 
         public int getRepayment() {
@@ -251,17 +251,17 @@ public class ArticleDetails {
     }
 
     public static class MainImage {
-        private final int maxWidth;
+        private final int max_width;
 
         private final String url;
 
-        public MainImage(int maxWidth, String url) {
-            this.maxWidth = maxWidth;
+        public MainImage(int max_width, String url) {
+            this.max_width = max_width;
             this.url = url;
         }
 
-        public int getMaxWidth() {
-            return maxWidth;
+        public int getMax_width() {
+            return max_width;
         }
 
         public String getUrl() {
@@ -288,17 +288,17 @@ public class ArticleDetails {
         }
 
         public static class Images {
-            private final int maxWidth;
+            private final int max_width;
 
             private final String url;
 
-            public Images(int maxWidth, String url) {
-                this.maxWidth = maxWidth;
+            public Images(int max_width, String url) {
+                this.max_width = max_width;
                 this.url = url;
             }
 
-            public int getMaxWidth() {
-                return maxWidth;
+            public int getMax_width() {
+                return max_width;
             }
 
             public String getUrl() {
@@ -309,19 +309,19 @@ public class ArticleDetails {
         public static class Videos {
             private final String url;
 
-            private final String thumbUrl;
+            private final String thumb_url;
 
-            public Videos(String url, String thumbUrl) {
+            public Videos(String url, String thumb_url) {
                 this.url = url;
-                this.thumbUrl = thumbUrl;
+                this.thumb_url = thumb_url;
             }
 
             public String getUrl() {
                 return url;
             }
 
-            public String getThumbUrl() {
-                return thumbUrl;
+            public String getThumb_url() {
+                return thumb_url;
             }
         }
     }

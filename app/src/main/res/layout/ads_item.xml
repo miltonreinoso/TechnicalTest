@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    android:background="@drawable/bg_square_white_borders">
+    android:background="@drawable/bg_square_white_solid">
 
     <RelativeLayout
         android:id="@+id/top_layout_banners"
@@ -63,7 +63,7 @@
         android:id="@+id/item_picture_imgv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintDimensionRatio="h,1:.75"
         android:layout_marginTop="16dp"
         android:scaleType="centerInside"
         android:visibility="visible"
@@ -75,11 +75,11 @@
         android:id="@+id/details_title_item_txtv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:textAlignment="center"
-        android:textSize="18sp"
+        android:textSize="16sp"
+        android:maxLines="2"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,13 +88,13 @@
 
     <android.support.v7.widget.AppCompatRatingBar
         android:id="@+id/star_rating"
-        style="@style/Base.Widget.AppCompat.RatingBar"
+        style="@style/Base.Widget.AppCompat.RatingBar.Small"
+        android:rating="5"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:numStars="6"
-        android:scaleX=".5"
-        android:scaleY=".5"
+        android:layout_marginStart="16dp"
+        android:numStars="5"
         android:progress="100"
         android:secondaryProgressTint="@color/blue"
         android:progressTint="@color/blue"
@@ -106,7 +106,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:textColor="@color/red"
         android:textSize="42sp"
@@ -122,7 +121,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/details_price_txtv"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp">
 
         <TextView
@@ -159,7 +157,7 @@
         android:id="@+id/extra_features_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="8dp"
         android:orientation="horizontal"
         android:layout_marginBottom="16dp"
@@ -174,7 +172,7 @@
             android:padding="4dp"
             android:maxLines="1"
             android:textAllCaps="true"
-            android:background="@android:color/darker_gray"
+            android:background="@drawable/bg_square_borders"
             android:textColor="@color/black"
             android:text="FULL HD"/>
         <TextView
@@ -184,7 +182,8 @@
             android:layout_marginStart="8dp"
             android:padding="4dp"
             android:maxLines="1"
-            android:textAllCaps="true"            android:background="@android:color/darker_gray"
+            android:textAllCaps="true"
+            android:background="@drawable/bg_square_borders"
             android:textColor="@color/black"
             android:text="WI-FI"/>
         <TextView
@@ -194,7 +193,8 @@
             android:layout_marginStart="8dp"
             android:padding="4dp"
             android:maxLines="1"
-            android:textAllCaps="true"            android:background="@android:color/darker_gray"
+            android:textAllCaps="true"
+            android:background="@drawable/bg_square_borders"
             android:textColor="@color/black"
             android:text="NETFLIX"/>
     </LinearLayout>

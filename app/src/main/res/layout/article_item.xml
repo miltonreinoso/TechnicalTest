@@ -95,7 +95,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:numStars="5"
-        android:progress="100"
+        android:progress="80"
         android:secondaryProgressTint="@color/blue"
         android:progressTint="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
@@ -199,9 +199,5 @@
             android:textColor="@color/black"
             android:text="NETFLIX"/>
     </LinearLayout>
-
-
-
-
 
 </android.support.constraint.ConstraintLayout>

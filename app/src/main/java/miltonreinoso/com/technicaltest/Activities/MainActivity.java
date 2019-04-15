@@ -1,6 +1,7 @@
 package miltonreinoso.com.technicaltest.Activities;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -122,9 +123,15 @@ public class MainActivity extends AppCompatActivity {
                     .placeholder(R.drawable.ic_arrow_back)
                     .into(mArticleImageView);
             mItemDescriptionTxtV.setText(mArticle.getDescription());
-            mPriceTxtV.setText("$"+mArticle.getPrice());
-            mListPriceTxtV.setText("$"+mArticle.getListPrice());
-            mDiscountTxtv.setText(mArticle.getDiscount());
+
+            String price = "$" + mArticle.getPrice();
+            String listPrice = "$" + mArticle.getList_price();
+            String discount = mArticle.getDiscount()+ "% OFF";
+
+            mPriceTxtV.setText(price);
+            mListPriceTxtV.setText(listPrice);
+            mListPriceTxtV.setPaintFlags(mListPriceTxtV.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            mDiscountTxtv.setText(discount);
 
         }
 

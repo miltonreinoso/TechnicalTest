@@ -13,7 +13,7 @@ public class ArticleDetails {
 
     private final String originalBrand;
 
-    private final int listPrice;
+    private final int list_price;
 
     private final int price;
 
@@ -46,7 +46,7 @@ public class ArticleDetails {
     private final Resources resources;
 
     public ArticleDetails(String xid, String description, String summary, String brand,
-                          String originalBrand, int listPrice, int price, int discount, boolean enabledForSale,
+                          String originalBrand, int list_price, int price, int discount, boolean enabledForSale,
                           PreferredInstallment preferredInstallment, String model, int categoryId,
                           MainImage mainImage, boolean virtual, List<Integer> categories, String category,
                           List<Object> productTags, int priceMatchingDiscount, double priceWithoutVat,
@@ -56,7 +56,7 @@ public class ArticleDetails {
         this.summary = summary;
         this.brand = brand;
         this.originalBrand = originalBrand;
-        this.listPrice = listPrice;
+        this.list_price = list_price;
         this.price = price;
         this.discount = discount;
         this.enabledForSale = enabledForSale;
@@ -94,8 +94,8 @@ public class ArticleDetails {
         return originalBrand;
     }
 
-    public int getListPrice() {
-        return listPrice;
+    public int getList_price() {
+        return list_price;
     }
 
     public int getPrice() {

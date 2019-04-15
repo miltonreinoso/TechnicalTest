@@ -1,10 +1,13 @@
 package miltonreinoso.com.technicaltest.Activities;
 
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -37,11 +40,12 @@ public class DetailsActivity extends AppCompatActivity {
 
     private TextView mNumberOfPicturesTxtv;
     private TextView mNumberOfVideosTxtv;
-    public TextView mItemTitleTxtv;
+    private TextView mItemTitleTxtv;
     private RatingBar mRatingBar;
     private TextView mPriceTxtv;
     private TextView mListPriceTxtv;
-    public TextView mDiscountTxtv;
+    private TextView mDiscountTxtv;
+    private ImageView mBackToolbarTxtv;
 
     private TextView mReview;
     public ViewPager mPicturesViewPager;
@@ -77,7 +81,14 @@ public class DetailsActivity extends AppCompatActivity {
         mPriceTxtv = findViewById(R.id.details_price_txtv);
         mListPriceTxtv = findViewById(R.id.details_list_price_txtv);
         mDiscountTxtv = findViewById(R.id.details_discount_txtv);
+        mBackToolbarTxtv = findViewById(R.id.details_back_toolbar_imgb);
 
+        mBackToolbarTxtv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
 
 
@@ -99,12 +110,15 @@ public class DetailsActivity extends AppCompatActivity {
         mNumberOfPicturesTxtv.setText(mArticleDetails.getResources().getImages().size()+"");
         mNumberOfVideosTxtv.setText(mArticleDetails.getResources().getVideos().size()+"");
 
-        mItemTitleTxtv.setText(mArticleDetails.getDescription());
         String price = "$" + mArticleDetails.getPrice();
+        String listPrice = "$" + mArticleDetails.getList_price();
+        String discount = mArticleDetails.getDiscount()+ "% OFF";
+
+
+        mItemTitleTxtv.setText(mArticleDetails.getDescription());
         mPriceTxtv.setText(price);
-        String listPrice = "$" + mArticleDetails.getPrice();
         mListPriceTxtv.setText(listPrice);
-        String discount = mArticleDetails.getDiscount()+ "% de descuento";
+        mListPriceTxtv.setPaintFlags(mListPriceTxtv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         mDiscountTxtv.setText(discount);
 
 //        mReview.setText(mArticleReviewsList.get(0).getReviews().get(0).getReviewText());

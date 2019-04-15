@@ -23,17 +23,17 @@ public class ArticleContent {
 
         private final String price;
 
-        private final String listPrice;
+        private final String list_price;
 
         private final String discount;
 
-        public Items(String id, String description, String image_url, String price, String listPrice,
+        public Items(String id, String description, String image_url, String price, String list_price,
                      String discount) {
             this.id = id;
             this.description = description;
             this.image_url = image_url;
             this.price = price;
-            this.listPrice = listPrice;
+            this.list_price = list_price;
             this.discount = discount;
         }
 
@@ -53,8 +53,8 @@ public class ArticleContent {
             return price;
         }
 
-        public String getListPrice() {
-            return listPrice;
+        public String getList_price() {
+            return list_price;
         }
 
         public String getDiscount() {

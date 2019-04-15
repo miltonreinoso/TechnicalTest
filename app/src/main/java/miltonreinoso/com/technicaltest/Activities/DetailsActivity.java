@@ -2,8 +2,10 @@ package miltonreinoso.com.technicaltest.Activities;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -16,23 +18,35 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
+import miltonreinoso.com.technicaltest.Adapters.ViewPagerAdapter;
 import miltonreinoso.com.technicaltest.Models.ArticleDetails;
 import miltonreinoso.com.technicaltest.Models.ArticleReviews;
 import miltonreinoso.com.technicaltest.R;
 
-public class Details extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity {
 
     private final String ARTICLE_DETAILS_URL = "http://garbarino-mock-api.s3-website-us-east-1.amazonaws.com/products/";
-    private final String ARTICLE_REVIEWS_URL = "http://garbarino-mock-api.s3-website-us-east-1.amazonaws.com/products/%7Bid%7D/reviews";
 
     private FetchDetailsTask mFetch;
-
-    private TextView mDetail;
     private ArticleDetails mArticleDetails;
     private ArticleReviews mArticleReviews;
+    private List<ArticleReviews.Items> mArticleReviewsList;
     private String mArticleID;
-    String TAG = "TAG";
+
+    private TextView mNumberOfPicturesTxtv;
+    private TextView mNumberOfVideosTxtv;
+    public TextView mItemTitleTxtv;
+    private RatingBar mRatingBar;
+    private TextView mPriceTxtv;
+    private TextView mListPriceTxtv;
+    public TextView mDiscountTxtv;
+
+    private TextView mReview;
+    public ViewPager mPicturesViewPager;
+
+
 
 
     @Override
@@ -54,13 +68,46 @@ public class Details extends AppCompatActivity {
         }
 
         mFetch = new FetchDetailsTask();
-        Log.d(TAG, "mArticleID: " + mArticleID);
-        Log.d(TAG, "ARTICLE_DETAILS_URL: " + ARTICLE_DETAILS_URL);
 
-        mDetail  = findViewById(R.id.detailtxt);
+        mPicturesViewPager = findViewById(R.id.pictures_view_pager);
+        mNumberOfPicturesTxtv = findViewById(R.id.number_of_pictures_txtv);
+        mNumberOfVideosTxtv = findViewById(R.id.number_of_videos_txtv);
+        mItemTitleTxtv = findViewById(R.id.details_title_item_txtv);
+        mRatingBar = findViewById(R.id.star_rating);
+        mPriceTxtv = findViewById(R.id.details_price_txtv);
+        mListPriceTxtv = findViewById(R.id.details_list_price_txtv);
+        mDiscountTxtv = findViewById(R.id.details_discount_txtv);
 
-        mFetch.execute(ARTICLE_DETAILS_URL + mArticleID );
 
+
+
+        mFetch.execute(ARTICLE_DETAILS_URL + mArticleID, ARTICLE_DETAILS_URL + mArticleID + "/reviews" );
+
+
+    }
+
+    private void setupView () {
+
+        String[] mImagesURLs = new String[mArticleDetails.getResources().getImages().size()];
+
+        for (int index =0; index < mImagesURLs.length; index++){
+            mImagesURLs [index] = "http:" + mArticleDetails.getResources().getImages().get(index).getUrl();
+        }
+        ViewPagerAdapter mViewPagerAdapter = new ViewPagerAdapter(this, mImagesURLs);
+        mPicturesViewPager.setAdapter(mViewPagerAdapter);
+
+        mNumberOfPicturesTxtv.setText(mArticleDetails.getResources().getImages().size()+"");
+        mNumberOfVideosTxtv.setText(mArticleDetails.getResources().getVideos().size()+"");
+
+        mItemTitleTxtv.setText(mArticleDetails.getDescription());
+        String price = "$" + mArticleDetails.getPrice();
+        mPriceTxtv.setText(price);
+        String listPrice = "$" + mArticleDetails.getPrice();
+        mListPriceTxtv.setText(listPrice);
+        String discount = mArticleDetails.getDiscount()+ "% de descuento";
+        mDiscountTxtv.setText(discount);
+
+//        mReview.setText(mArticleReviewsList.get(0).getReviews().get(0).getReviewText());
 
     }
 
@@ -118,15 +165,16 @@ public class Details extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String s) {
+        protected void onPostExecute(String detailsStringURL ) {
 
-            StringReader jsonString = new StringReader(s);
-            mArticleDetails = new Gson().fromJson(jsonString, ArticleDetails.class);
+            StringReader jsonStringDetails = new StringReader(detailsStringURL);
+//            StringReader jsonStringReviews = new StringReader(detailsStringURL+"/reviews");
 
-            mDetail.setText(mArticleDetails.getDescription());
-
+            mArticleDetails = new Gson().fromJson(jsonStringDetails, ArticleDetails.class);
+//            mArticleReviews = new Gson().fromJson(jsonStringReviews, ArticleReviews.class);
+//            mArticleReviewsList = mArticleReviews.getItems();
+            setupView();
         }
     }
-
 }
 

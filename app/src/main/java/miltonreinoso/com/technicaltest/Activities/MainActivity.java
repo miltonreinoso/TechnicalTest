@@ -101,16 +101,16 @@ public class MainActivity extends AppCompatActivity {
             super(itemView);
             itemView.setOnClickListener(this);
             mArticleImageView = itemView.findViewById(R.id.item_picture_imgv);
-            mItemDescriptionTxtV = itemView.findViewById(R.id.title_item_txtv);
-            mPriceTxtV = itemView.findViewById(R.id.price_txtv);
-            mListPriceTxtV = itemView.findViewById(R.id.scrapped_price_txtv);
-            mDiscountTxtv = itemView.findViewById(R.id.discount_txtv);
+            mItemDescriptionTxtV = itemView.findViewById(R.id.details_title_item_txtv);
+            mPriceTxtV = itemView.findViewById(R.id.details_price_txtv);
+            mListPriceTxtV = itemView.findViewById(R.id.details_list_price_txtv);
+            mDiscountTxtv = itemView.findViewById(R.id.details_discount_txtv);
         }
 
         @Override
         public void onClick(View v) {
             Toast.makeText(getApplicationContext(), "Will show more details on new activity", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(), Details.class);
+            Intent intent = new Intent(getApplicationContext(), DetailsActivity.class);
             intent.putExtra(ARTICLE_ID, mArticle.getId());
             startActivity(intent);
         }

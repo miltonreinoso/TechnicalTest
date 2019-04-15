@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activities.Details"></activity>
+        <activity android:name=".Activities.DetailsActivity"></activity>
         <activity
             android:name=".Activities.MainActivity"
             android:configChanges="orientation"

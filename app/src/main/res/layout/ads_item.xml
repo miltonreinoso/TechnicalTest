@@ -48,14 +48,16 @@
     </RelativeLayout>
 
     <ImageView
-    android:id="@+id/favourite_imgv"
-    android:layout_width="36dp"
-    android:layout_height="36dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginEnd="16dp"
-    android:src="@color/red"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"/>
+        android:id="@+id/favourite_imgv"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+
+        android:src="@drawable/ic_favorite_border_black_24dp"
+        android:tint="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/item_picture_imgv"
@@ -70,7 +72,7 @@
         app:layout_constraintTop_toBottomOf="@id/top_layout_banners"/>
 
     <TextView
-        android:id="@+id/title_item_txtv"
+        android:id="@+id/details_title_item_txtv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -97,10 +99,10 @@
         android:secondaryProgressTint="@color/blue"
         android:progressTint="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_item_txtv" />
+        app:layout_constraintTop_toBottomOf="@id/details_title_item_txtv" />
 
     <TextView
-        android:id="@+id/price_txtv"
+        android:id="@+id/details_price_txtv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -118,13 +120,13 @@
         android:id="@+id/bonificated_price_linear_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/price_txtv"
+        app:layout_constraintTop_toBottomOf="@id/details_price_txtv"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp">
 
         <TextView
-            android:id="@+id/scrapped_price_txtv"
+            android:id="@+id/details_list_price_txtv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="visible"
@@ -137,7 +139,7 @@
             tools:text="$3.700" />
 
         <TextView
-            android:id="@+id/discount_txtv"
+            android:id="@+id/details_discount_txtv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -196,6 +198,9 @@
             android:textColor="@color/black"
             android:text="NETFLIX"/>
     </LinearLayout>
+
+
+
 
 
 </android.support.constraint.ConstraintLayout>
